@@ -1,0 +1,25 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.natisp.theprofessorbook"
+    },
+    "cordova-plugin-admob-simple": {
+      "PACKAGE_NAME": "com.natisp.theprofessorbook"
+    },
+    "cordova-plugin-inapppurchase": {
+      "PACKAGE_NAME": "com.natisp.theprofessorbook"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-admob-sdklibs": {
+      "PACKAGE_NAME": "com.natisp.theprofessorbook"
+    }
+  }
+}

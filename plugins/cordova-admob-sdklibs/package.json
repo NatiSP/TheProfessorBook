@@ -1,0 +1,98 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "cordova-admob-sdklibs",
+        "scope": null,
+        "escapedName": "cordova-admob-sdklibs",
+        "name": "cordova-admob-sdklibs",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\a619642\\professor-book\\TheProfessorBook"
+    ]
+  ],
+  "_from": "cordova-admob-sdklibs@latest",
+  "_id": "cordova-admob-sdklibs@2.1.6",
+  "_inCache": true,
+  "_location": "/cordova-admob-sdklibs",
+  "_nodeVersion": "6.9.1",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/cordova-admob-sdklibs-2.1.6.tgz_1506266353075_0.5129366549663246"
+  },
+  "_npmUser": {
+    "name": "cupertino",
+    "email": "behealthynow@gmail.com"
+  },
+  "_npmVersion": "3.10.8",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "cordova-admob-sdklibs",
+    "scope": null,
+    "escapedName": "cordova-admob-sdklibs",
+    "name": "cordova-admob-sdklibs",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-admob-sdklibs/-/cordova-admob-sdklibs-2.1.6.tgz",
+  "_shasum": "adaf5e0139477dc8ce1514fe2f03bc4efc7b7de1",
+  "_shrinkwrap": null,
+  "_spec": "cordova-admob-sdklibs",
+  "_where": "C:\\Users\\a619642\\professor-book\\TheProfessorBook",
+  "author": {
+    "name": "Sunny Cupertino"
+  },
+  "bugs": {
+    "url": "https://github.com/sunnycupertino/cordova-admob-sdklibs/issues"
+  },
+  "cordova": {
+    "id": "cordova-admob-sdklibs",
+    "platforms": [
+      "android",
+      "ios",
+      "amazon-fireos",
+      "wp8",
+      "windows"
+    ]
+  },
+  "dependencies": {},
+  "description": "Add Google Mobile Ads SDK to Cordova project, as dependency for other plugins",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "adaf5e0139477dc8ce1514fe2f03bc4efc7b7de1",
+    "tarball": "https://registry.npmjs.org/cordova-admob-sdklibs/-/cordova-admob-sdklibs-2.1.6.tgz"
+  },
+  "gitHead": "e8c53da9677a5c461005f6ac8defaa16dad9e175",
+  "homepage": "https://github.com/sunnycupertino/cordova-admob-sdklibs#readme",
+  "keywords": [
+    "cordova",
+    "ecosystem:cordova",
+    "ad",
+    "admob",
+    "google"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "cupertino",
+      "email": "behealthynow@gmail.com"
+    }
+  ],
+  "name": "cordova-admob-sdklibs",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunnycupertino/cordova-admob-sdklibs.git"
+  },
+  "scripts": {},
+  "version": "2.1.6"
+}

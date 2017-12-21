@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-admob-sdklibs"
+        version="2.1.6">
+      
+    <name>Google Mobile Ads SDK for Cordova</name>
+    <description>Add Google Mobile Ads SDK to Cordova project, as dependency for other plugins</description>
+    <author>Google</author>
+    <keywords>admob,google,ad</keywords>
+    <repo>https://github.com/sunnycupertino/cordova-admob-sdklibs.gitt</repo>
+    <issue>https://github.com/sunnycupertino/cordova-admob-sdklibs/issues</issue>
+
+    <engines>
+        <engine name="cordova" version=">=3.0" />
+    </engines>
+
+    <platform name="android">
+        <!-- for gradle -->
+        <framework src="com.google.android.gms:play-services-base:+" />
+        <framework src="com.google.android.gms:play-services-ads:+" />
+        <!-- for ant -->
+        <!--dependency id="cordova-plugin-googleplayservices"/ -->
+     </platform>
+    
+    <platform name="amazon-fireos">
+        <!-- using ant, framework tag for android sdk cannot be supported, so we use external dependency -->
+        <dependency id="cordova-plugin-googleplayservices"/>
+     </platform>
+
+     <platform name="ios">
+		<framework src="src/ios/GoogleMobileAds.framework" custom="true" />
+        <framework src="AdSupport.framework" />
+        <framework src="AudioToolbox.framework" />
+        <framework src="AVFoundation.framework" />
+        <framework src="CoreBluetooth.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="CoreMedia.framework" />
+        <framework src="CoreMotion.framework" />
+        <framework src="CoreTelephony.framework" />
+        <framework src="CoreVideo.framework" />
+        <framework src="EventKit.framework" />
+        <framework src="EventKitUI.framework" />
+        <framework src="Foundation.framework" />
+        <framework src="GLKit.framework" />
+        <framework src="MediaPlayer.framework" />
+        <framework src="MessageUI.framework" />
+        <framework src="OpenGLES.framework" />
+        <framework src="SafariServices.framework" />
+        <framework src="StoreKit.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="UIKit.framework" />
+
+<!--
+		<hook type="after_plugin_add" src="hooks/after_plugin_add/000-create-links.sh" />
+--> 
+    </platform>
+
+     <!-- Windows Phone 8 -->
+     <platform name="wp8">
+          <config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities">
+			<Capability Name="ID_CAP_IDENTITY_USER" />
+			<Capability Name="ID_CAP_NETWORKING" />
+			<Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+			<Capability Name="ID_CAP_PHONEDIALER" />
+			<Capability Name="ID_CAP_MEDIALIB_PHOTO" />
+        </config-file>
+		
+		<framework src="src/wp8/GoogleAds.dll" custom="true" />
+     </platform>
+
+     <!-- Windows Phone 8.1+ -->
+     <platform name="windows">
+        <config-file target="package.windows.appxmanifest" parent="/Package/Capabilities">
+		    <Capability Name="internetClientServer" />
+        </config-file>
+        <config-file target="package.windows80.appxmanifest" parent="/Package/Capabilities">
+		    <Capability Name="internetClientServer" />
+        </config-file>
+        <config-file target="package.phone.appxmanifest" parent="/Package/Capabilities">
+		    <Capability Name="internetClientServer" />
+        </config-file>
+	
+		<framework src="src/wp8/GoogleAds.dll" custom="true" />
+    </platform>
+
+</plugin>
