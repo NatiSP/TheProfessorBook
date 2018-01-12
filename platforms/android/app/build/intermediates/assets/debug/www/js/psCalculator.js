@@ -21,12 +21,9 @@ psApp.controller("psCtrl", ['$scope','$window',
         numPreference = 4;
       }
       $scope.init = function(){
-        var poke1 = { currentPS: null, totalPS: null };
-        var poke2 = { currentPS: null, totalPS: null };
-        console.log(poke1);
         for(var i=0; i<numPreference; i++){
-          $scope.team1.push(poke1);
-          $scope.team2.push(poke2);
+          $scope.team1.push({ currentPS: null, totalPS: null });
+          $scope.team2.push({ currentPS: null, totalPS: null });
           console.log($scope.team1);
         }
       };

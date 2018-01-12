@@ -12,9 +12,6 @@
     },
     "cordova-plugin-admob-simple": {
       "PACKAGE_NAME": "com.natisp.theprofessorbook"
-    },
-    "cordova-plugin-inapppurchase": {
-      "PACKAGE_NAME": "com.natisp.theprofessorbook"
     }
   },
   "dependent_plugins": {

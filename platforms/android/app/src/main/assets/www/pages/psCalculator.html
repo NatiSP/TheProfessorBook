@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../lib/popper.js"></script>
     <script type="text/javascript" src="../lib/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/psCalculator.js"></script>
-    <title>Ruleset</title>
+    <title>HP Calculator</title>
 </head>
 
 
@@ -66,9 +66,33 @@
 	</div>
   <div>
     <div ng-controller="psCtrl">
+      <div class="row " style="margin:1%">
+        <div class="col-10">
       <div class="alert alert-primary" role="alert" style="margin : 1%" >
         <!-- <p ng-bind="result"></p> -->The result is: {{result}}
       </div>
+    </div>
+      <div style="margin : 1%" >
+      <a class="btn btn-info" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <i class="fa fa-cog" aria-hidden="true"></i>
+      </a>
+    </div>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          <div>
+          <h5>Number of Pokémon in HP Calculator: {{numPreference}}</h5>
+          <div class="btn-group" role="group" >
+            <button class="btn btn-secondary " type="radio" id="option1" ng-click="setPokeNumber(1)" >1</button>
+            <button class="btn btn-secondary " type="radio" id="option2" ng-click="setPokeNumber(2)" >2</button>
+            <button class="btn btn-secondary " type="radio" id="option3" ng-click="setPokeNumber(3)" >3</button>
+            <button class="btn btn-secondary " type="radio" id="option4" ng-click="setPokeNumber(4)" >4</button>
+            <button class="btn btn-secondary " type="radio" id="option5" ng-click="setPokeNumber(5)" >5</button>
+            <button class="btn btn-secondary " type="radio" id="option6" ng-click="setPokeNumber(6)" >6</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 <div class="row " style="margin:1%">
 <div class="card"  style="margin : 1%">
