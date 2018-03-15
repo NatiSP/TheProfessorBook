@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../lib/popper.js"></script>
     <script type="text/javascript" src="../lib/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/timer.js"></script>
-    <title>Ruleset</title>
+    <title>Timer</title>
 </head>
 
 
@@ -76,6 +76,7 @@
       </div>
       <div class="alert alert-primary text-center" style="padding:1%" role="alert">
         <p class="h3" ng-bind="counter | secondsToDateTime | date:'mm:ss'"></p>
+        <p class="h3" ng-bind="counter"></p>
       </div>
       <!-- <p ng-bind="timeLimit"></p> -->
       <div class="progress" style="height: 20px;">
@@ -85,9 +86,9 @@
         <div class="col text-center">
     <button type="button" class="btn btn-success btn-block" ng-click="start()" ng-disabled="status == 'start'">Start</button>
   </div>
-  <div class="col text-center">
+  <!-- <div class="col text-center">
     <button type="button" class="btn btn-info btn-block" ng-click="reset()">Reset</button>
-  </div>
+  </div> -->
   <div class="col text-center">
     <button type="button" class="btn btn-danger btn-block" ng-click="stop()" ng-disabled="status == 'stop'">Stop</button>
   </div>
