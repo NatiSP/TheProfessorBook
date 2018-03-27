@@ -1,5 +1,5 @@
-var psApp = angular.module("psApp", []);
-psApp.controller("psCtrl", ['$scope','$window',
+
+professorApp.controller("psCtrl", ['$scope','$window',
   function($scope,$window) {
       // $scope.team1 = [
       //   { currentPS: null, totalPS: null },

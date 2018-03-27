@@ -20,10 +20,10 @@ module.exports = [
 module.exports.metadata = 
 // TOP OF METADATA
 {
-  "cordova-plugin-whitelist": "1.3.3",
   "cordova-admob-sdklibs": "2.1.6",
   "cordova-plugin-admob-simple": "3.3.4",
-  "cordova-plugin-inapppurchase": "1.1.0"
+  "cordova-plugin-inapppurchase": "1.1.0",
+  "cordova-plugin-whitelist": "1.3.3"
 };
 // BOTTOM OF METADATA
 });

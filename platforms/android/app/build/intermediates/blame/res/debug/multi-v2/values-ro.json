@@ -1,16 +1,16 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\a619642\\professor-book\\TheProfessorBook\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ro\\values-ro.xml",
+            "outputFile": "C:\\Users\\natis\\Workspace\\TheProfessorBook\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ro\\values-ro.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\a619642\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-ads-11.8.0.aar\\583c32efe59bba27e21c7c04e60722ac\\res\\values-ro\\values.xml",
+                    "source": "C:\\Users\\natis\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-ads-12.0.0.aar\\8b1859a4b62ee0ed798814a28402a086\\res\\values-ro\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10",
                         "startColumns": "0,0,0,0,0,0,0",
-                        "startOffsets": "235,308,433,500,566,655,769",
+                        "startOffsets": "199,272,397,464,530,619,733",
                         "endColumns": "72,124,66,65,88,113,71",
-                        "endOffsets": "307,432,499,565,654,768,840"
+                        "endOffsets": "271,396,463,529,618,732,804"
                     },
                     "to": {
                         "startLines": "20,21,22,23,24,25,26",
@@ -21,30 +21,30 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\a619642\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-11.8.0.aar\\39dfe5a73e60943c9de3b8f73a49965d\\res\\values-ro\\values.xml",
+                    "source": "C:\\Users\\natis\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\9014b2be040b5540b484596e2b56cdd3\\res\\values-ro\\values-ro.xml",
                     "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "283",
-                        "endColumns": "203",
-                        "endOffsets": "486"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
                     },
                     "to": {
-                        "startLines": "10",
+                        "startLines": "27",
                         "startColumns": "4",
-                        "startOffsets": "1283",
-                        "endColumns": "203",
-                        "endOffsets": "1482"
+                        "startOffsets": "3488",
+                        "endColumns": "100",
+                        "endOffsets": "3584"
                     }
                 },
                 {
-                    "source": "C:\\Users\\a619642\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.8.0.aar\\56ac4b7b6c3eec3146237b4b0a107f1c\\res\\values-ro\\values.xml",
+                    "source": "C:\\Users\\natis\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-12.0.0.aar\\2db05a5808a751bc4e614d424440d4c8\\res\\values-ro\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "281,386,578,705,812,1022,1152,1301,1435,1656,1764,1954,2084,2289,2481,2578,2671",
+                        "startOffsets": "245,350,542,669,776,986,1116,1265,1399,1620,1728,1918,2048,2253,2445,2542,2635",
                         "endColumns": "104,191,126,106,209,129,148,133,220,107,189,129,204,191,96,92,106",
-                        "endOffsets": "385,577,704,811,1021,1151,1300,1434,1655,1763,1953,2083,2288,2480,2577,2670,2777"
+                        "endOffsets": "349,541,668,775,985,1115,1264,1398,1619,1727,1917,2047,2252,2444,2541,2634,2741"
                     },
                     "to": {
                         "startLines": "2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19",
@@ -52,6 +52,23 @@
                         "startOffsets": "105,214,406,537,648,858,992,1145,1487,1708,1820,2010,2144,2349,2545,2646,2743",
                         "endColumns": "108,191,130,110,209,133,152,137,220,111,189,133,204,195,100,96,110",
                         "endOffsets": "209,401,532,643,853,987,1140,1278,1703,1815,2005,2139,2344,2540,2641,2738,2849"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\natis\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-12.0.0.aar\\554b9658eaede847b560d39c073f3060\\res\\values-ro\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "203",
+                        "endOffsets": "450"
+                    },
+                    "to": {
+                        "startLines": "10",
+                        "startColumns": "4",
+                        "startOffsets": "1283",
+                        "endColumns": "203",
+                        "endOffsets": "1482"
                     }
                 }
             ]

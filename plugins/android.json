@@ -7,10 +7,10 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-whitelist": {
+    "cordova-plugin-admob-simple": {
       "PACKAGE_NAME": "com.natisp.theprofessorbook"
     },
-    "cordova-plugin-admob-simple": {
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.natisp.theprofessorbook"
     }
   },

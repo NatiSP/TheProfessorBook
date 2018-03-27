@@ -1,5 +1,5 @@
-var settingsApp = angular.module("settingsApp", []);
-settingsApp.controller("settingsCtrl", ['$scope','$window',
+
+professorApp.controller("settingsCtrl", ['$scope','$window',
   function($scope,$window) {
 
     var storage = window.localStorage;

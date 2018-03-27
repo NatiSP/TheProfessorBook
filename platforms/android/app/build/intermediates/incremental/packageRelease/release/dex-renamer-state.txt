@@ -1,4 +1,4 @@
-#Fri Jan 12 13:18:03 GMT 2018
-base.0=C\:\\Users\\a619642\\professor-book\\TheProfessorBook\\platforms\\android\\app\\build\\intermediates\\transforms\\dex\\release\\0
+#Mon Mar 26 21:46:32 CEST 2018
+base.0=C\:\\Users\\natis\\Workspace\\TheProfessorBook\\platforms\\android\\app\\build\\intermediates\\transforms\\dex\\release\\0
 renamed.0=classes.dex
-file.0=C\:\\Users\\a619642\\professor-book\\TheProfessorBook\\platforms\\android\\app\\build\\intermediates\\transforms\\dex\\release\\0\\classes.dex
+file.0=C\:\\Users\\natis\\Workspace\\TheProfessorBook\\platforms\\android\\app\\build\\intermediates\\transforms\\dex\\release\\0\\classes.dex

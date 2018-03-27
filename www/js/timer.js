@@ -1,5 +1,5 @@
-var timerApp = angular.module("timerApp", []);
-timerApp.controller("timerCtrl", ['$scope','$timeout',
+
+professorApp.controller("timerCtrl", ['$scope','$timeout',
   function($scope,$timeout) {
       var storage = window.localStorage;
       $scope.counter = 3000;
@@ -26,6 +26,7 @@ timerApp.controller("timerCtrl", ['$scope','$timeout',
           if($scope.counter > 0){
             console.log($scope.counter + " " + $scope.time);
             $scope.counter = $scope.timeLimit - (((new Date().getTime() - $scope.startTime) / 1000) | 0);
+            $scope.time = 100 * ($scope.counter/$scope.timeLimit);
             if ($scope.counter <= 0) {
                 $scope.startTime = Date.now() + 1000;
             }
@@ -61,7 +62,7 @@ timerApp.controller("timerCtrl", ['$scope','$timeout',
 
   }]);
 
-timerApp.filter('secondsToDateTime', [function() {
+professorApp.filter('secondsToDateTime', [function() {
       return function(seconds) {
           return new Date(1970, 0, 1).setSeconds(seconds);
       };

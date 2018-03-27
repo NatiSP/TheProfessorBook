@@ -1,19 +1,17 @@
-var psApp = angular.module("psApp", []);
-
-psApp.controller("psCtrl", ['$scope','$window',
-	function($scope,$window) {	
+professorApp.controller("penaltyFormCtrl", ['$scope','$window',
+	function($scope,$window) {
 		var storage = window.localStorage;
 		var listPenalties = angular.fromJson(storage.getItem("listPenalties"));
-		var idPenalty = getRealId();		
-		
-		if (idPenalty != -1){		
-			$scope.penalty = listPenalties[idPenalty];			
+		var idPenalty = getRealId();
+
+		if (idPenalty != -1){
+			$scope.penalty = listPenalties[idPenalty];
 		} else {
 			var newId = getNewId();
 			$scope.penalty = getPenalty(newId, "","","","","","");
 		}
-		
-		
+
+
 		function getPenalty(id, playerName,playerId,level,type,severity,comments){
 			var penalty = {id: id,
 						playerName: playerName,
@@ -24,8 +22,8 @@ psApp.controller("psCtrl", ['$scope','$window',
 						comments: comments};
 			return penalty;
 		};
-		
-		$scope.savePenalty = function(){	
+
+		$scope.savePenalty = function(){
 			if (listPenalties == null){
 				listPenalties = [];
 				listPenalties.push($scope.penalty);
@@ -36,17 +34,18 @@ psApp.controller("psCtrl", ['$scope','$window',
 				} else {
 					listPenalties[idPenalty] = $scope.penalty;
 				}
-			}						
-					
+			}
+
 			storage.setItem("listPenalties", angular.toJson(listPenalties));
-			$window.location.href = 'penalties.html';
+			$("#penaltyTab").removeClass("d-none");
+			$("#penaltyForm").addClass("d-none");
 		};
-		
+
 		function getNewId(){
 			if (listPenalties == null){
 				return 0;
 			}
-			
+
 			var maxId = 0;
 			for (var i = 0; i < listPenalties.length; i++) {
 				var actualPenalty = listPenalties[i];
@@ -54,23 +53,23 @@ psApp.controller("psCtrl", ['$scope','$window',
 					maxId = actualPenalty.id;
 				}
 			}
-			
+
 			return maxId + 1;
 		}
-		
+
 		function getRealId(){
 			var id = parseInt(storage.getItem("currentPenalty"));
-			
+
 			if (id == -1){
 				return id;
-			} 
-			
+			}
+
 			for (var i = 0; i < listPenalties.length; i++) {
 				if (listPenalties[i].id == id){
 					return i;
 				}
 			}
-			
+
 		}
-		
+
 	}]);

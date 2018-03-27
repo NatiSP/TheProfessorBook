@@ -23,7 +23,7 @@ set Sec=%dt:~12,2%
 set datetimef=%YYYY%-%MM%-%DD%_%HH%-%Min%-%Sec%
 
 
-call cordova build android --release
+call phonegap build android --release
 
 echo.
 echo ============================================================
