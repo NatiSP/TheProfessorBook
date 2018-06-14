@@ -1,5 +1,5 @@
-professorApp.controller("penaltyCtrl", ['$scope','$window',
-	function($scope,$window, Excel, $timeout) {	
+professorApp.controller("penaltyCtrl", ['$scope','$window','$http',
+	function($scope,$window, $http) {	
 		var storage;
 		var listPenalties;
 		var idPenalty;
@@ -158,37 +158,35 @@ professorApp.controller("penaltyCtrl", ['$scope','$window',
 				&& penaltyActual.type != "" && penaltyActual.level != "" && penaltyActual.severity != "";
 		}
 		
-		$scope.exportToExcel=function(){			
-			var file = $("#excelFile")[0].files[0];
-			  
-			var reader = new FileReader();
-			var name = file.name;
-			reader.onload = function(e) {
-				var data = e.target.result;
-
-				var wb = XLSX.read(data, {type: 'binary', cellStyles:true});
-				first_sheet_name = wb.SheetNames[0];
+		$scope.exportToExcel=function(){
+			$http({
+				method:'GET',
+				url:'https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1TXjJ_gjZhkxjtUk70UghLnpTrYZ9i6Qs',
+				responseType:'arraybuffer'
+			  }).then(function(d) {
+					var data = new Uint8Array(d.data);
+					var wb = XLSX.read(data, {type:"array", cellStyles:true});
+					first_sheet_name = wb.SheetNames[0];
 			
-				var wopts = { bookType:'xlsx', cellStyles:true, bookSST:false, type:'binary' };            
-				var worksheet = wb.Sheets[first_sheet_name];
-				rellenarCeldas(worksheet);
+					var wopts = { bookType:'xlsx', cellStyles:true, bookSST:false, type:'binary' };            
+					var worksheet = wb.Sheets[first_sheet_name];
+					rellenarCeldas(worksheet);
+						
+					var wbout = XLSX.write(wb,wopts);
+
+					function s2ab(s) {
+						var buf = new ArrayBuffer(s.length);
+						var view = new Uint8Array(buf);
+						for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+						return buf;
+					}
+
+					var fileName = "penaltySummary" + getDate(null) + ".xlsx";				
+					saveAs(new Blob([s2ab(wbout)],{type:""}), fileName);
 					
-				var wbout = XLSX.write(wb,wopts);
-
-				function s2ab(s) {
-					var buf = new ArrayBuffer(s.length);
-					var view = new Uint8Array(buf);
-					for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
-					return buf;
-				}
-
-				var fileName = "penaltySummary" + getDate(null) + ".xlsx";				
-				saveAs(new Blob([s2ab(wbout)],{type:""}), fileName);
-				
-				loadPenalties();
-			};
-			
-			reader.readAsBinaryString(file);  
+					loadPenalties();			
+			  }, function(err) { console.log(err); });			
+		 
 		};
 
 		
