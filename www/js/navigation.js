@@ -23,8 +23,9 @@ function hideAll(){
   $("#rulesTab").addClass("d-none");
   $("#timerTab").addClass("d-none");
   $("#HPCalcTab").addClass("d-none");
-  $("#penaltyTab").addClass("d-none");
+  $("#penaltyTab").addClass("d-none");  
   $("#penaltyForm").addClass("d-none");
+  $("#penaltyExcel").addClass("d-none");
   $("#settingsTab").addClass("d-none");
 }
 
@@ -53,9 +54,9 @@ function loadHPCalc(){
 }
 
 function loadPenalties(){
-  hideAll();
-  $("#penaltyTab").removeClass("d-none");
-  $('.menu').toggleClass('menu-active');
+	hideAll();	
+	$("#penaltyTab").trigger("loadListPenalty");
+	$('.menu').toggleClass('menu-active');
 }
 
 function loadSettings(){
