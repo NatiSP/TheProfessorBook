@@ -41,20 +41,24 @@ under the License.
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="css/font_awesome/css/font-awesome.min.css">
 <!--<link rel="stylesheet" type="text/css" href="css/index.css" />-->
+<link rel="stylesheet" type="text/css" href="css/app.css" />
 
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="lib/popper.js"></script>
 <script type="text/javascript" src="lib/bootstrap.js"></script>
 <script type="text/javascript" src="lib/angular.min.js"></script>
-<script type="text/javascript" src="lib/xlsx.core.min.js"></script> 
-<script type="text/javascript" src="lib/FileSaver.min.js"></script> 
+<script type="text/javascript" src="lib/xlsx.core.min.js"></script>
+<script type="text/javascript" src="lib/FileSaver.min.js"></script>
 
 <script type="text/javascript" src="js/mainApp.js"></script>
-<script type="text/javascript" src="js/timer.js"></script>
 <script type="text/javascript" src="js/psCalculator.js"></script>
 <script type="text/javascript" src="js/penalties.js"></script>
 <script type="text/javascript" src="js/navigation.js"></script>
+<script type="text/javascript" src="js/timer.js"></script>
 <script type="text/javascript" src="js/settings.js"></script>
+
+<script type="text/javascript" src="js/raphael-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/justgage.js"></script>
 
 <title>The Professor Book</title>
 </head>
@@ -153,19 +157,20 @@ under the License.
             <div ng-controller="timerCtrl">
               <div class="row justify-content-center" style="padding:1%">
                 <div class="col text-center">
-                  <button class="btn btn-secondary btn-block" type="button" id="option1" ng-click="setTime(1200)" >Set Bo1</button>
+                  <button class="btn btn-secondary btn-block" type="button" id="option1" ng-click="setTime(12)" >Set Bo1</button>
                 </div>
                 <div class="col text-center">
                   <button class="btn btn-secondary btn-block" type="button" id="option2" ng-click="setTime(3000)" >Set Bo3</button>
                 </div>
               </div>
-              <div class="alert alert-primary text-center" style="padding:1%" role="alert">
+              <!-- <div class="alert alert-primary text-center" style="padding:1%" role="alert">
                 <p class="h3" ng-bind="counter | secondsToDateTime | date:'mm:ss'"></p>
-              </div>
+              </div> -->
               <!-- <p ng-bind="timeLimit"></p> -->
-              <div class="progress" style="height: 20px;">
+              <div id="gg1" class="gauge"></div>
+              <!-- <div class="progress blue" style="height: 20px;">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{time}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( time + '%' ) }"></div>
-              </div>
+              </div> -->
               <div class="row justify-content-center" style="padding:1%">
                 <div class="col text-center">
                   <button type="button" class="btn btn-success btn-block" ng-click="start()" ng-disabled="status == 'start'">Start</button>
@@ -272,7 +277,7 @@ under the License.
         <!-- START PENALTIES -->
 		<div ng-controller="penaltyCtrl">
 		  <!-- START LIST PENALTIES -->
-          <div id="penaltyTab" class="app container d-none">			
+          <div id="penaltyTab" class="app container d-none">
             <div class="row " style="margin:1%">
               <table class="table table-striped" id="penaltiesTable">
                 <thead>
@@ -297,7 +302,7 @@ under the License.
                     <td>{{penalty.type}}</td>
 					<td style="display: none"> {{penalty.level}}</td>
 					<td style="display: none"> {{penalty.severity}}</td>
-                    <td>{{penalty.comments}}</td>					
+                    <td>{{penalty.comments}}</td>
                     <td>
                       <button ng-click="modifyPenalty(penalty.id);" class="btn btn-success btn-block" >
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
@@ -328,7 +333,7 @@ under the License.
 
             <!-- START PENALTY FORM -->
             <!-- Form to Add/Modify a Penalty -->
-            <div id="penaltyForm" class="app container d-none">				
+            <div id="penaltyForm" class="app container d-none">
 			<form id="penalty">
 				<div class="row justify-content-center" style="margin:1%">
                   <div class="input-group">
@@ -413,17 +418,17 @@ under the License.
                     <a  href="#" class="btn btn-info btn-block" onclick="loadPenalties();">Back</a>
                   </div>
                 </div>
-				
+
 				<div class="row alert alert-warning alert-dismissible d-none" id="msPenaltyInfo" >
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> 
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					Please, fill all required fields.
 				</div>
 			</form>
             </div>
 			<!-- END PENALTY FORM -->
-			
+
 			<!-- START EXPORT EXCEL -->
-			<div id="penaltyExcel" class="app container d-none">				
+			<div id="penaltyExcel" class="app container d-none">
 				<form id="excel">
 					<div class="row justify-content-center" style="margin:1%">
 						<div class="input-group">
@@ -450,16 +455,16 @@ under the License.
 						</div>
 					</div>
 					<div class="row justify-content-center" style="padding:1%">
-						<div class="col text-center">							
+						<div class="col text-center">
 							<input type="submit" class="btn btn-success btn-block" ng-click="exportToExcel()" value="Create Excel"/>
 						</div>
 						<div class="col text-center">
 							<a  href="#" class="btn btn-info btn-block" onclick="loadPenalties();">Back</a>
 						</div>
 					</div>
-				</form>				
+				</form>
 			</div>
-			<!-- END EXPORT EXCEL -->			
+			<!-- END EXPORT EXCEL -->
 		</div>
             <!-- END PENALTIES -->
 
