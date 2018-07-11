@@ -45,7 +45,7 @@ professorApp.controller("penaltyCtrl", ['$scope','$window','$http',
 			storage.setItem("currentPenalty", id);
 			cargarPenalty();
 			$("#penaltyTab").addClass("d-none");
-			$("#msPenaltyInfo").addClass("d-none");
+			$("#msPenaltyInfo").empty();
 			$("#penaltyForm").removeClass("d-none");
 		};
 
@@ -54,13 +54,13 @@ professorApp.controller("penaltyCtrl", ['$scope','$window','$http',
 			cargarPenalty();
 			
 			$("#penaltyTab").addClass("d-none");
-			$("#msPenaltyInfo").addClass("d-none");
+			$("#msPenaltyInfo").empty();
 			$("#penaltyForm").removeClass("d-none");
 		};
 		
 		$scope.goToExport = function(){			
 			$("#penaltyTab").addClass("d-none");
-			$("#msPenaltyInfo").addClass("d-none");
+			$("#msPenaltyInfo").empty();
 			$("#penaltyExcel").removeClass("d-none");
 		};
 		
@@ -118,8 +118,12 @@ professorApp.controller("penaltyCtrl", ['$scope','$window','$http',
 			return maxId + 1;
 		}		
 		
+		msMandatory  = '<div class="alert alert-warning alert-dismissible" >'
+						+ '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'
+						+ 'Please, fill all required fields.</div>';
+		
 		$scope.savePenalty = function(){
-			$("#msPenaltyInfo").addClass("d-none");
+			$("#msPenaltyInfo").empty();
 			validado = comprobarCamposObligatorios();
 			
 			if (validado){
@@ -138,8 +142,9 @@ professorApp.controller("penaltyCtrl", ['$scope','$window','$http',
 				storage.setItem("listPenalties", angular.toJson(listPenalties));
 				$("#penaltyForm").addClass("d-none");
 				cargarListaPenalties();
-			} else {
-				$("#msPenaltyInfo").removeClass("d-none");
+			} else {						
+				$("#msPenaltyInfo").html(msMandatory);
+				
 			}
 		};
 		
@@ -158,34 +163,63 @@ professorApp.controller("penaltyCtrl", ['$scope','$window','$http',
 				&& penaltyActual.type != "" && penaltyActual.level != "" && penaltyActual.severity != "";
 		}
 		
+		function comprobarCamposObligaExcel(){
+			return $("#eventId").val() != "" && $("#eventDate").val() != ""
+				$("#organizerName").val() != "" && $("#organizerId").val() != "";
+		}
+		
 		$scope.exportToExcel=function(){
-			$http({
-				method:'GET',
-				url:'https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1TXjJ_gjZhkxjtUk70UghLnpTrYZ9i6Qs',
-				responseType:'arraybuffer'
-			  }).then(function(d) {
-					var data = new Uint8Array(d.data);
-					var wb = XLSX.read(data, {type:"array", cellStyles:true});
-					first_sheet_name = wb.SheetNames[0];
-			
-					var wopts = { bookType:'xlsx', cellStyles:true, bookSST:false, type:'binary' };            
-					var worksheet = wb.Sheets[first_sheet_name];
-					rellenarCeldas(worksheet);
+			$("#msPenaltyExport").empty();
+			validado = comprobarCamposObligaExcel();
+
+			if (validado){
+				mensaje = '<div class="alert alert-danger alert-dismissible" >'
+					+ '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'
+					+ 'There are a problem exporting. Please, try again later.</div>';
+				
+				/*console.log("hola");				
+				var wb = XLSX.readFile('docs/penaltySummary.xlsx');
+				console.log("hola 2");	
+				first_sheet_name = wb.SheetNames[0];					        
+				var worksheet = wb.Sheets[first_sheet_name];
+				rellenarCeldas(worksheet);
+				console.log("hola 3");				
+				XLSX.writeFile(wb, 'out.xlsx');
+				console.log("hola 4");	
+				loadPenalties();*/
+				
+				$http({
+					method:'GET',
+					url:'https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1TXjJ_gjZhkxjtUk70UghLnpTrYZ9i6Qs',
+					responseType:'arraybuffer'
+				  }).then(function(d) {
+						var data = new Uint8Array(d.data);
+						var wb = XLSX.read(data, {type:"array", cellStyles:true});
+						first_sheet_name = wb.SheetNames[0];					
+						var wopts = { bookType:'xlsx', cellStyles:true, bookSST:false, type:'binary' };            
+						var worksheet = wb.Sheets[first_sheet_name];
+						rellenarCeldas(worksheet);
+							
+						var wbout = XLSX.write(wb,wopts);
+
+						function s2ab(s) {
+							var buf = new ArrayBuffer(s.length);
+							var view = new Uint8Array(buf);
+							for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+							return buf;
+						}
 						
-					var wbout = XLSX.write(wb,wopts);
+						var fileName = "penaltySummary" + getDate(null) + ".xlsx";				
+						saveAs(new Blob([s2ab(wbout)],{type:""}), fileName);
 
-					function s2ab(s) {
-						var buf = new ArrayBuffer(s.length);
-						var view = new Uint8Array(buf);
-						for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
-						return buf;
-					}
-
-					var fileName = "penaltySummary" + getDate(null) + ".xlsx";				
-					saveAs(new Blob([s2ab(wbout)],{type:""}), fileName);
-					
-					loadPenalties();			
-			  }, function(err) { console.log(err); });			
+						loadPenalties();			
+				  }, function(err) { 
+						console.log(err);						
+						$("#msPenaltyExport").html(mensaje);
+				  });
+			} else {
+				$("#msPenaltyExport").html(msMandatory);
+			}
 		 
 		};
 
