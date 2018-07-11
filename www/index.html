@@ -337,31 +337,31 @@ under the License.
 			<form id="penalty">
 				<div class="row justify-content-center" style="margin:1%">
                   <div class="input-group">
-                    <label for="judgeName"  class="input-group-addon" style="width:40%">Judge's Name*</label>
+                    <label for="judgeName"  class="input-group-addon" style="width:50%">Judge's Name*</label>
                     <input type="text" id="judgeName" class="form-control" ng-model="penalty.judgeName" />
                   </div>
                 </div>
                 <div class="row justify-content-center" style="margin:1%">
                   <div class="input-group">
-                    <label for="judgeId"  class="input-group-addon" style="width:40%">Judge's Player Id*</label>
+                    <label for="judgeId"  class="input-group-addon" style="width:50%">Judge's Player Id*</label>
                     <input type="text" class="form-control" id="judgeId" ng-model="penalty.judgeId" />
                   </div>
                 </div>
                 <div class="row justify-content-center" style="margin:1%">
                   <div class="input-group">
-                    <label for="playerName"  class="input-group-addon" style="width:40%">Player's Name*</label>
+                    <label for="playerName"  class="input-group-addon" style="width:50%">Player's Name*</label>
                     <input type="text" id="playerName" class="form-control" ng-model="penalty.playerName" />
                   </div>
                 </div>
                 <div class="row justify-content-center" style="margin:1%">
                   <div class="input-group">
-                    <label for="playerId"  class="input-group-addon" style="width:40%">Player's Id*</label>
+                    <label for="playerId"  class="input-group-addon" style="width:50%">Player's Id*</label>
                     <input type="text" class="form-control" id="playerId" ng-model="penalty.playerId" />
                   </div>
                 </div>
                 <div class="row justify-content-center" style="margin:1%">
                   <div class="input-group">
-                    <label for="penaltyLevel" class="input-group-addon" style="width:40%">Penalty Level*</label>
+                    <label for="penaltyLevel" class="input-group-addon" style="width:50%">Penalty Level*</label>
                     <select class="form-control" id="penaltyLevel" ng-model="penalty.level" >
                       <option>Caution</option>
                       <option>Warning</option>
@@ -372,7 +372,7 @@ under the License.
                 </div>
                 <div class="row justify-content-center" style="margin:1%">
                   <div class="input-group">
-                    <label for="infractionType" class="input-group-addon" style="width:40%">Infraction Type*</label>
+                    <label for="infractionType" class="input-group-addon" style="width:50%">Infraction Type*</label>
                     <select class="form-control" id="infractionType" ng-model="penalty.type" >
                       <option>Game Play</option>
                       <option>Team Error</option>
@@ -383,7 +383,7 @@ under the License.
                 </div>
                 <div class="row justify-content-center" style="margin:1%">
                   <div class="input-group">
-                    <label for="infractionSeverity" class="input-group-addon" style="width:40%">Infraction Severity*</label>
+                    <label for="infractionSeverity" class="input-group-addon" style="width:50%">Infraction Severity*</label>
                     <select class="form-control" id="infractionSeverity" ng-model="penalty.severity" >
                       <option>Minor</option>
                       <option>Major</option>
@@ -393,19 +393,19 @@ under the License.
                 </div>
 				<div class="row justify-content-center" style="margin:1%">
                   <div class="input-group">
-                    <label for="round"  class="input-group-addon" style="width:40%">Infraction Round</label>
+                    <label for="round"  class="input-group-addon" style="width:50%">Infraction Round</label>
                     <input type="number" min=1 id="round" class="form-control" ng-model="penalty.round" />
                   </div>
                 </div>
                 <div class="row justify-content-center" style="margin:1%">
                   <div class="input-group">
-                    <label for="additional"  class="input-group-addon" style="width:40%">Additional Penalties</label>
+                    <label for="additional"  class="input-group-addon" style="width:50%">Additional Penalties</label>
                     <input type="text" class="form-control" id="additional" ng-model="penalty.additional" />
                   </div>
                 </div>
                 <div class="row justify-content-center" style="margin:1%">
                   <div class="input-group">
-                    <label for="comments" class="input-group-addon" style="width:40%">Detailed Information</label>
+                    <label for="comments" class="input-group-addon" style="width:50%">Detailed Information</label>
                     <textarea class="form-control" id="comments" rows="3" ng-model="penalty.comments"></textarea>
                   </div>
                 </div>
@@ -419,7 +419,7 @@ under the License.
                   </div>
                 </div>
 
-				<div class="row" style="padding:1%" id="msPenaltyInfo"></div>
+				<div class="row justify-content-center" style="padding:1%" id="msPenaltyInfo"></div>
 			</form>
             </div>
 			<!-- END PENALTY FORM -->
@@ -429,25 +429,25 @@ under the License.
 				<form id="excel">
 					<div class="row justify-content-center" style="margin:1%">
 						<div class="input-group">
-							<label for="eventId"  class="input-group-addon" style="width:40%">Event ID*</label>
+							<label for="eventId"  class="input-group-addon" style="width:50%">Event ID*</label>
 							<input type="text" id="eventId" class="form-control" ng-model="eventId" />
 						</div>
 					</div>
 					<div class="row justify-content-center" style="margin:1%">
 						<div class="input-group">
-							<label for="eventDate"  class="input-group-addon" style="width:40%">Event Date*</label>
+							<label for="eventDate"  class="input-group-addon" style="width:50%">Event Date*</label>
 							<input type="date" class="form-control" id="eventDate" ng-model="eventDate"  />
 						</div>
 					</div>
 					<div class="row justify-content-center" style="margin:1%">
 						<div class="input-group">
-							<label for="organizerName"  class="input-group-addon" style="width:40%">Tournament Organizer Name*</label>
+							<label for="organizerName"  class="input-group-addon" style="width:50%">TO Name*</label>
 							<input type="text" id="organizerName" class="form-control" ng-model="organizerName" />
 						</div>
 					</div>
 					<div class="row justify-content-center" style="margin:1%">
 						<div class="input-group">
-							<label for="organizerId"  class="input-group-addon" style="width:40%">Tournament Organizer Player ID*</label>
+							<label for="organizerId"  class="input-group-addon" style="width:50%">TO Player ID*</label>
 							<input type="text" class="form-control" id="organizerId" ng-model="organizerId"/>
 						</div>
 					</div>
@@ -460,7 +460,7 @@ under the License.
 						</div>
 					</div>
 					
-					<div class="row" style="padding:1%" id="msPenaltyExport"></div>
+					<div class="row justify-content-center" style="padding:1%" id="msPenaltyExport"></div>
 				</form>
 			</div>
 			<!-- END EXPORT EXCEL -->

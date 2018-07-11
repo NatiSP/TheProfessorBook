@@ -118,7 +118,7 @@ professorApp.controller("penaltyCtrl", ['$scope','$window','$http',
 			return maxId + 1;
 		}		
 		
-		msMandatory  = '<div class="alert alert-warning alert-dismissible" >'
+		msMandatory  = '<div class="alert alert-warning alert-dismissible" style="width:90%" >'
 						+ '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'
 						+ 'Please, fill all required fields.</div>';
 		
@@ -173,9 +173,9 @@ professorApp.controller("penaltyCtrl", ['$scope','$window','$http',
 			validado = comprobarCamposObligaExcel();
 
 			if (validado){
-				mensaje = '<div class="alert alert-danger alert-dismissible" >'
+				mensaje = '<div class="alert alert-danger alert-dismissible" style="width:90%" >'
 					+ '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'
-					+ 'There are a problem exporting. Please, try again later.</div>';
+					+ 'There was a problem exporting. Please, try again later.</div>';
 				
 				/*console.log("hola");				
 				var wb = XLSX.readFile('docs/penaltySummary.xlsx');
