@@ -2,7 +2,7 @@ var timerGage;
 
 // process the confirmation dialog result
 function onConfirm(buttonIndex) {
-    if(buttonIndex == "Yes"){
+    if(buttonIndex == "Yes" || buttonIndex == 1){
       navigator.app.exitApp();
     }
 }
@@ -11,7 +11,7 @@ function onConfirm(buttonIndex) {
 //
 function askForExit() {
     navigator.notification.confirm(
-        'You want to exit?', // message
+        'Do you want to exit?', // message
          onConfirm,            // callback to invoke with index of button pressed
         'Exit',           // title
         ['Yes','No']         // buttonLabels
@@ -21,14 +21,13 @@ function askForExit() {
 function hideAll(){
   $('.menu').toggleClass('menu-active');
   $(".navbar-collapse").collapse('hide');
-  $("#indexTab").addClass("d-none");
-  $("#rulesTab").addClass("d-none");
-  $("#timerTab").addClass("d-none");
-  $("#HPCalcTab").addClass("d-none");
-  $("#penaltyTab").addClass("d-none");
-  $("#penaltyForm").addClass("d-none");
-  $("#penaltyExcel").addClass("d-none");
-  $("#settingsTab").addClass("d-none");
+  $(".tab").addClass("d-none");
+}
+
+function loadTab(tab){
+  hideAll();
+  $(tab).removeClass("d-none");
+  $('.menu').toggleClass('menu-active');
 }
 
 function loadIndex(){
@@ -110,13 +109,4 @@ var getCurrentTime = function (){
 
 $("#button").click(function() {
   $('.menu').toggleClass('menu-active');
-});
-
-// setup a logfile path (required)
-// this path is relative to your device sdcard storage directory
-window.logToFile.setLogfilePath('/ProfessorBook/log.txt', function () {
-    // logger configured successfully
-}, function (err) {
-    // logfile could not be written
-    // handle error
 });

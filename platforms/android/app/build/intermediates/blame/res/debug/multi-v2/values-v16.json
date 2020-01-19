@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\natis\\Workspace\\TheProfessorBook\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+            "outputFile": "C:\\Users\\natal\\git\\TheProfessorBook\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\natis\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\9014b2be040b5540b484596e2b56cdd3\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\natal\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.0.aar\\d946d54e669f8cf589de41e837fb5edd\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

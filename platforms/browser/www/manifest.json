@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "The Professor Book",
+  "short_name": "The Professor Book",
+  "version": "com.natisp.theprofessorbook",
+  "description": "The best tools for TO and Judges",
+  "author": "Natalia Gutiérrez",
+  "icons": [],
+  "start_url": "index.html"
+}

@@ -27,7 +27,7 @@ under the License.
   <meta name="msapplication-tap-highlight" content="no" />
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
   <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; media-src *" />
   <!-- Good default declaration:
   * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
   * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
@@ -51,6 +51,7 @@ under the License.
 <script type="text/javascript" src="lib/FileSaver.min.js"></script>
 
 <script type="text/javascript" src="js/mainApp.js"></script>
+<script type="text/javascript" src="js/rules.js"></script>
 <script type="text/javascript" src="js/psCalculator.js"></script>
 <script type="text/javascript" src="js/penalties.js"></script>
 <script type="text/javascript" src="js/navigation.js"></script>
@@ -58,7 +59,7 @@ under the License.
 <script type="text/javascript" src="js/settings.js"></script>
 
 <script type="text/javascript" src="js/raphael-2.1.4.min.js"></script>
-<script type="text/javascript" src="js/justgage.js"></script>
+<script src="cordova.js"></script>
 
 <title>The Professor Book</title>
 </head>
@@ -74,47 +75,20 @@ under the License.
 </div>
 </label> -->
 
-<nav class="navbar navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">The Professor Book</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <i class="fa fa-bars" aria-hidden="true"></i>
-
-  </button>
-
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#" onclick="this.focus(); loadIndex();"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" onclick="this.focus(); loadRules();"><i class="fa fa-book" aria-hidden="true"></i> Rules and Resources</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" onclick="this.focus(); loadTimer();"><i class="fa fa-clock-o" aria-hidden="true"></i> Timer</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" onclick="this.focus(); loadHPCalc();"><i class="fa fa-calculator" aria-hidden="true"></i> HP Calculator</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" onclick="this.focus(); loadPenalties();"><i class="fa fa-gavel" aria-hidden="true"></i> Penalties</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" onclick="this.focus(); loadSettings();"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" onclick="navigator.app.exitApp();"><i class="fa fa-power-off" aria-hidden="true"></i> Exit</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
 <div class="app">
   <!-- START INDEX -->
-  <div id="indexTab" class="container">
-    <div class="row justify-content-center" style="padding:10%">
+  <div ng-include="'fragments/navigator.html'"></div>
+  <div id="indexTab" class="tab container">
+    <div class="row justify-content-center" style="padding:5%">
       <div class="col ml-auto">
-        <!-- <a href="pages/rules.html" role="button" class="btn btn-primary btn-block"><i class="fa fa-book" aria-hidden="true"></i> <span>Reglamento</span></a> -->
-        <button type="button" class="btn btn-primary btn-block" onclick="loadRules();"><i class="fa fa-book" aria-hidden="true"></i> <span>Rules and Resources</span></button>
+        <div class="row justify-content-center" style="padding-bottom: 5%">
+          <div class="col ml-auto">
+            <button type="button" class="btn btn-primary btn-block" onclick="loadTab('#rulesVGCTab');" style="height:4em"><i class="fa fa-book" aria-hidden="true" style="font-size: 2em"></i><br/><span>VGC Rules and Resources</span></button>
+          </div>
+          <div class="col ml-auto">
+            <button type="button" class="btn btn-warning btn-block" onclick="loadTab('#rulesTCGTab');" style="height:4em"><i class="fa fa-book" aria-hidden="true" style="font-size: 2em"></i><br/><span>TCG Rules and Resources</span></button>
+          </div>
+        </div>
         <button type="button" class="btn btn-success btn-block" onclick="loadTimer();"><i class="fa fa-clock-o" aria-hidden="true"></i> <span>Timer</span></button>
         <!-- <a href="pages/timer.html" role="button" class="btn btn-success btn-block"><i class="fa fa-clock-o" aria-hidden="true"></i> <span>Timer</span></a> -->
         <button type="button" class="btn btn-success btn-block" onclick="loadHPCalc();"><i class="fa fa-calculator" aria-hidden="true"></i> <span>HP Calculator</span></a>
@@ -123,7 +97,7 @@ under the License.
         </div>
         <div class="row justify-content-center" style="padding:10%">
           <div class="col ml-auto">
-            <a href="#" onclick="loadSettings();" role="button" class="btn btn-info btn-block" ><i class="fa fa-cog" aria-hidden="true"></i> <span>Settings</span></a>
+            <a href="#" onclick="loadSettings();" role="button" class="btn btn-dark btn-block" ><i class="fa fa-cog" aria-hidden="true"></i> <span>Settings</span></a>
           </div>
           <div class="col ml-auto">
             <button type="button" class="btn btn-danger btn-block" onclick="askForExit();"><i class="fa fa-power-off" aria-hidden="true"></i> <span>Exit</span></button>
@@ -136,61 +110,44 @@ under the License.
       <!-- END INDEX -->
 
       <!-- START RULES AND RESOURCES -->
-      <div id="rulesTab" class="container d-none">
+	  <div ng-controller="rulesCtrl">
+      <div id="rulesVGCTab" class="tab container d-none">
         <div class="row justify-content-center" style="padding:10%">
           <div class="col ml-auto">
             <!-- <a href="pages/rules.html" role="button" class="btn btn-primary btn-block"><i class="fa fa-book" aria-hidden="true"></i> <span>Reglamento</span></a> -->
-            <button type="button" class="btn btn-primary btn-block" onclick="window.open('https://assets.pokemon.com//assets/cms2-en-uk/pdf/play-pokemon/rules/play-pokemon-vg-rules-formats-and-penalty-guidelines-en.pdf', '_blank')"><i class="fa fa-book" aria-hidden="true"></i> <span>VG Rules and Formats</span></button>
-            <button type="button" class="btn btn-success btn-block" onclick="window.open('https://assets.pokemon.com//assets/cms2/pdf/play-pokemon/rules/play-pokemon-tournament-sanctioning-regulations-en.pdf', '_blank')"><i class="fa fa-gavel"></i> <span>Sanctioning Regulations</span></button>
+            <button type="button" class="btn btn-primary btn-block" style="height:4em" ng-click="openRules('vgRules')"><i class="fa fa-book" style="font-size: 2em" aria-hidden="true"></i> <span>VG Rules and Formats</span></button>
+            <button type="button" class="btn btn-primary btn-block" onclick="window.open('https://assets.pokemon.com//assets/cms2/pdf/play-pokemon/rules/play-pokemon-tournament-sanctioning-regulations-10232019-en.pdf', '_blank')"><i class="fa fa-gavel"></i> <span>Sanctioning Regulations</span></button>
             <!-- <a href="pages/timer.html" role="button" class="btn btn-success btn-block"><i class="fa fa-clock-o" aria-hidden="true"></i> <span>Timer</span></a> -->
-            <button type="button" class="btn btn-success btn-block" onclick="window.open('https://assets.pokemon.com//assets/cms2/pdf/play-pokemon/rules/play-pokemon-tournament-operation-procedures-en.pdf', '_blank')"><i class="fa fa-trophy" aria-hidden="true"></i> <span>TO Procedures</span></button>
-            <button type="button" class="btn btn-success btn-block" onclick="window.open('http://support.pokemon.com/FileManagement/Download/47d0686ce6ab41919a611e8ede8f9210', '_blank')"><i class="fa fa-file-text" aria-hidden="true"></i> <span>VG Team List</span></button>
+            <button type="button" class="btn btn-primary btn-block" onclick="window.open('https://assets.pokemon.com//assets/cms2/pdf/play-pokemon/rules/play-pokemon-tournament-operation-procedures-10232019-en.pdf', '_blank')"><i class="fa fa-trophy" aria-hidden="true"></i> <span>TO Procedures</span></button>
+            <button type="button" class="btn btn-primary btn-block" onclick="window.open('https://assets.pokemon.com//assets/cms2/pdf/play-pokemon/rules/play-pokemon-vg-team-list-2020.pdf', '_blank')"><i class="fa fa-file-text" aria-hidden="true"></i> <span>VG Team List</span></button>
+            <button type="button" class="btn btn-info btn-block" onclick="loadIndex();"><span>Back</span></button>
             </div>
             </div>
 
           </div>
+          <div id="rulesTCGTab" class="tab container d-none">
+            <div class="row justify-content-center" style="padding:10%">
+              <div class="col ml-auto">
+                <!-- <a href="pages/rules.html" role="button" class="btn btn-primary btn-block"><i class="fa fa-book" aria-hidden="true"></i> <span>Reglamento</span></a> -->
 
-          <!-- END RULES AND RESOURCES -->
+                <button type="button" class="btn btn-warning btn-block" style="height:4em" onclick="window.open('https://assets.pokemon.com//assets/cms2/pdf/play-pokemon/rules/play-pokemon-tcg-rules-and-formats-10232019-en.pdf', '_blank')"><i class="fa fa-book" style="font-size: 2em" aria-hidden="true"></i> <span>TCG Rules and Formats</span></button>
+                <button type="button" class="btn btn-warning btn-block" onclick="window.open('https://assets.pokemon.com//assets/cms2/pdf/play-pokemon/rules/play-pokemon-tcg-penalty-guidelines-10232019-en.pdf', '_blank')"><i class="fa fa-gavel"></i> <span>Penalty Guidelines</span></button>
+                <!-- <a href="pages/timer.html" role="button" class="btn btn-success btn-block"><i class="fa fa-clock-o" aria-hidden="true"></i> <span>Timer</span></a> -->
+                <button type="button" class="btn btn-warning btn-block" onclick="window.open('https://assets.pokemon.com//assets/cms2/pdf/play-pokemon/rules/play-pokemon-tournament-operation-procedures-10232019-en.pdf', '_blank')"><i class="fa fa-trophy" aria-hidden="true"></i> <span>TO Procedures</span></button>
+                <button type="button" class="btn btn-warning btn-block" onclick="window.open('https://assets.pokemon.com//assets/cms2/pdf/play-pokemon/rules/play-pokemon-deck-list-a4-cec.pdf', '_blank')"><i class="fa fa-file-text" aria-hidden="true"></i> <span>Deck List</span></button>
+                <button type="button" class="btn btn-info btn-block" onclick="loadIndex();"><span>Back</span></button>
+                </div>
+                </div>
 
-          <!-- START TIMER -->
-          <div id="timerTab" class="d-none">
-            <div ng-controller="timerCtrl">
-              <div class="row justify-content-center" style="padding:1%">
-                <div class="col text-center">
-                  <button class="btn btn-secondary btn-block" type="button" id="option1" ng-click="setTime(12)" >Set Bo1</button>
-                </div>
-                <div class="col text-center">
-                  <button class="btn btn-secondary btn-block" type="button" id="option2" ng-click="setTime(3000)" >Set Bo3</button>
-                </div>
               </div>
-              <!-- <div class="alert alert-primary text-center" style="padding:1%" role="alert">
-                <p class="h3" ng-bind="counter | secondsToDateTime | date:'mm:ss'"></p>
-              </div> -->
-              <!-- <p ng-bind="timeLimit"></p> -->
-              <div id="gg1" class="gauge"></div>
-              <!-- <div class="progress blue" style="height: 20px;">
-                <div class="progress-bar" role="progressbar" aria-valuenow="{{time}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( time + '%' ) }"></div>
-              </div> -->
-              <div class="row justify-content-center" style="padding:1%">
-                <div class="col text-center">
-                  <button type="button" class="btn btn-success btn-block" ng-click="start()" ng-disabled="status == 'start'">Start</button>
-                </div>
-                <!-- <div class="col text-center">
-                <button type="button" class="btn btn-info btn-block" ng-click="reset()">Reset</button>
-              </div> -->
-              <div class="col text-center">
-                <button type="button" class="btn btn-danger btn-block" ng-click="stop()" ng-disabled="status == 'stop'">Stop</button>
-              </div>
-            </div>
-            <p ng-bind="time.progress"></p>
-          </div>
-        </div>
+		</div>
+              <!-- END RULES AND RESOURCES -->
 
-        <!-- END TIMER -->
+          <div ng-include="'pages/timer.html'"></div>
 
         <!-- START HP CALCULATOR -->
 
-        <div id="HPCalcTab" class="container d-none">
+        <div id="HPCalcTab" class="tab container d-none">
           <div ng-controller="psCtrl">
             <div class="row " style="margin:1%">
               <div class="col-10">
@@ -265,8 +222,12 @@ under the License.
 
             <div class="row justify-content-center" style="padding:1%">
               <div class="col text-center">
-                <button type="button" class="btn btn-success btn-block" ng-click="calc()">Calculate</button>
+                <button type="button" class="btn btn-info btn-block" onclick="loadIndex();">Back</button>
               </div>
+              <div class="col text-center">
+                <button type="button" class="btn btn-success btn-block" ng-click="calc();">Calculate</button>
+              </div>
+
             </div>
           </div>
         </div>
@@ -274,220 +235,35 @@ under the License.
 
         <!-- END HP CALC -->
 
-        <!-- START PENALTIES -->
-		<div ng-controller="penaltyCtrl">
-		  <!-- START LIST PENALTIES -->
-          <div id="penaltyTab" class="app container d-none">
-            <div class="row " style="margin:1%">				
-              <table class="table table-striped" id="penaltiesTable">
-                <thead>
-                  <tr>
-					<th style="display: none">Player Name</th>
-                    <th>Player ID</th>
-                    <th>Infraction Type</th>
-					<th style="display: none">Penalty Level</th>
-					<th style="display: none">Infraction Severity</th>
-                    <th style="display: none">Comments</th>
-					<th colspan="2" ng-if="listPenalties.length != 0" style="text-align: right;">
-						<button class="btn btn-warning" ng-click="goToExport()">
-							<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export
-						</button>
-					</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="penalty in listPenalties" >
-					<td style="display: none"> {{penalty.playerName}}</td>
-                    <td> {{penalty.playerId}}</td>
-                    <td>{{penalty.type}}</td>
-					<td style="display: none"> {{penalty.level}}</td>
-					<td style="display: none"> {{penalty.severity}}</td>
-                    <td style="display: none">{{penalty.comments}}</td>
-                    <td>
-                      <button ng-click="modifyPenalty(penalty.id);" class="btn btn-success btn-block" >
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                      </td>
-                      <td>
-                        <button class="btn btn-danger btn-block" ng-click="deletePenalty(penalty.id);">
-                          <i class="fa fa-times" aria-hidden="true"></i>
-						</button>
-                        </td>
-                      </tr>
-                      <tr ng-if="listPenalties.length == 0">
-                        <td colspan=7>The List is empty</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+        <div ng-include="'pages/penalties.html'"></div>
 
-                <div class="row justify-content-center" style="padding:1%">
-                  <div class="col text-center">
-                    <button type="button" class="btn btn-success btn-block" ng-click="addPenalty()">Add Penalty</button>
-                  </div>
-                  <div class="col text-center">
-                    <button type="button" class="btn btn-info btn-block" ng-click="reset()">Reset</button>
-                  </div>
-                </div>
-			</div>
-            <!-- END LIST PENALTIES -->
 
-            <!-- START PENALTY FORM -->
-            <!-- Form to Add/Modify a Penalty -->
-            <div id="penaltyForm" class="app container d-none">
-			<form id="penalty">
-				<div class="row justify-content-center" style="margin:1%">
-                  <div class="input-group">
-                    <label for="judgeName"  class="input-group-addon" style="width:50%">Judge's Name*</label>
-                    <input type="text" id="judgeName" class="form-control" ng-model="penalty.judgeName" />
-                  </div>
-                </div>
-                <div class="row justify-content-center" style="margin:1%">
-                  <div class="input-group">
-                    <label for="judgeId"  class="input-group-addon" style="width:50%">Judge's Player Id*</label>
-                    <input type="text" class="form-control" id="judgeId" ng-model="penalty.judgeId" />
-                  </div>
-                </div>
-                <div class="row justify-content-center" style="margin:1%">
-                  <div class="input-group">
-                    <label for="playerName"  class="input-group-addon" style="width:50%">Player's Name*</label>
-                    <input type="text" id="playerName" class="form-control" ng-model="penalty.playerName" />
-                  </div>
-                </div>
-                <div class="row justify-content-center" style="margin:1%">
-                  <div class="input-group">
-                    <label for="playerId"  class="input-group-addon" style="width:50%">Player's Id*</label>
-                    <input type="text" class="form-control" id="playerId" ng-model="penalty.playerId" />
-                  </div>
-                </div>
-                <div class="row justify-content-center" style="margin:1%">
-                  <div class="input-group">
-                    <label for="penaltyLevel" class="input-group-addon" style="width:50%">Penalty Level*</label>
-                    <select class="form-control" id="penaltyLevel" ng-model="penalty.level" >
-                      <option>Caution</option>
-                      <option>Warning</option>
-                      <option>Game Loss</option>
-                      <option>Disqualification</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row justify-content-center" style="margin:1%">
-                  <div class="input-group">
-                    <label for="infractionType" class="input-group-addon" style="width:50%">Infraction Type*</label>
-                    <select class="form-control" id="infractionType" ng-model="penalty.type" >
-                      <option>Game Play</option>
-                      <option>Team Error</option>
-                      <option>Procedural</option>
-                      <option>Unsporting</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row justify-content-center" style="margin:1%">
-                  <div class="input-group">
-                    <label for="infractionSeverity" class="input-group-addon" style="width:50%">Infraction Severity*</label>
-                    <select class="form-control" id="infractionSeverity" ng-model="penalty.severity" >
-                      <option>Minor</option>
-                      <option>Major</option>
-                      <option>Severe</option>
-                    </select>
-                  </div>
-                </div>
-				<div class="row justify-content-center" style="margin:1%">
-                  <div class="input-group">
-                    <label for="round"  class="input-group-addon" style="width:50%">Infraction Round</label>
-                    <input type="number" min=1 id="round" class="form-control" ng-model="penalty.round" />
-                  </div>
-                </div>
-                <div class="row justify-content-center" style="margin:1%">
-                  <div class="input-group">
-                    <label for="additional"  class="input-group-addon" style="width:50%">Additional Penalties</label>
-                    <input type="text" class="form-control" id="additional" ng-model="penalty.additional" />
-                  </div>
-                </div>
-                <div class="row justify-content-center" style="margin:1%">
-                  <div class="input-group">
-                    <label for="comments" class="input-group-addon" style="width:50%">Detailed Information</label>
-                    <textarea class="form-control" id="comments" rows="3" ng-model="penalty.comments"></textarea>
-                  </div>
-                </div>
-
-                <div class="row justify-content-center" style="padding:1%">
-                  <div class="col text-center">
-                    <button type="button" class="btn btn-success btn-block" ng-click="savePenalty()">Save changes</button>
-                  </div>
-                  <div class="col text-center">
-                    <a  href="#" class="btn btn-info btn-block" onclick="loadPenalties();">Back</a>
-                  </div>
-                </div>
-
-				<div class="row justify-content-center" style="padding:1%" id="msPenaltyInfo"></div>
-			</form>
-            </div>
-			<!-- END PENALTY FORM -->
-
-			<!-- START EXPORT EXCEL -->
-			<div id="penaltyExcel" class="app container d-none">
-				<form id="excel">
-					<div class="row justify-content-center" style="margin:1%">
-						<div class="input-group">
-							<label for="eventId"  class="input-group-addon" style="width:50%">Event ID*</label>
-							<input type="text" id="eventId" class="form-control" ng-model="eventId" />
-						</div>
-					</div>
-					<div class="row justify-content-center" style="margin:1%">
-						<div class="input-group">
-							<label for="eventDate"  class="input-group-addon" style="width:50%">Event Date*</label>
-							<input type="date" class="form-control" id="eventDate" ng-model="eventDate"  />
-						</div>
-					</div>
-					<div class="row justify-content-center" style="margin:1%">
-						<div class="input-group">
-							<label for="organizerName"  class="input-group-addon" style="width:50%">TO Name*</label>
-							<input type="text" id="organizerName" class="form-control" ng-model="organizerName" />
-						</div>
-					</div>
-					<div class="row justify-content-center" style="margin:1%">
-						<div class="input-group">
-							<label for="organizerId"  class="input-group-addon" style="width:50%">TO Player ID*</label>
-							<input type="text" class="form-control" id="organizerId" ng-model="organizerId"/>
-						</div>
-					</div>
-					<div class="row justify-content-center" style="padding:1%">
-						<div class="col text-center">
-							<button type="button" class="btn btn-success btn-block" ng-click="exportToExcel()">Create Excel</button>
-						</div>
-						<div class="col text-center">
-							<a  href="#" class="btn btn-info btn-block" onclick="loadPenalties();">Back</a>
-						</div>
-					</div>
-					
-					<div class="row justify-content-center" style="padding:1%" id="msPenaltyExport"></div>
-				</form>
-			</div>
-			<!-- END EXPORT EXCEL -->
-		</div>
-            <!-- END PENALTIES -->
 
             <!-- START SETTINGS -->
+			
+			<div ng-include="'pages/settings.html'"></div>
 
-            <div id="settingsTab" class="d-none" ng-controller="settingsCtrl">
-              <h2>Settings</h2>
-              <br/>
-              <h5>Number of Pokémon in HP Calculator: {{pokeNumber}}</h5>
-              <div class="btn-group" role="group" >
-                <button class="btn btn-secondary " type="radio" id="option1" ng-click="setPokeNumber(1)" >1</button>
-                <button class="btn btn-secondary " type="radio" id="option2" ng-click="setPokeNumber(2)" >2</button>
-                <button class="btn btn-secondary " type="radio" id="option3" ng-click="setPokeNumber(3)" >3</button>
-                <button class="btn btn-secondary " type="radio" id="option4" ng-click="setPokeNumber(4)" >4</button>
-                <button class="btn btn-secondary " type="radio" id="option5" ng-click="setPokeNumber(5)" >5</button>
-                <button class="btn btn-secondary " type="radio" id="option6" ng-click="setPokeNumber(6)" >6</button>
-              </div>
-
-
-
-
-            </div>
 
             <!-- END SETTINGS -->
+			 <style>
+				.footer {
+				  position: fixed;
+				  left: 0;
+				  bottom: 0;
+				  width: 100%;
+				  background-color: lightblue;
+				  color: black;
+				  text-align: center;
+				  z-index: 5;
+				}
+			</style>
+			<br/><br/>
+			<br/><br/>
+			<div></div>
+
+			<div class="footer page-footer font-small">
+			  <p>Made by <a href="https://twitter.com/natisp_">Natalia G.</a> - ver. Amaura(1.0.0)</p>
+			</div> 
           </body>
           </html>
 
@@ -500,57 +276,13 @@ under the License.
 
 
       <script>
-      // //initialize the goodies
-      function initAd(){
-        if ( window.plugins && window.plugins.AdMob ) {
-          var ad_units = {
-            ios : {
-              banner: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx',		//PUT ADMOB ADCODE HERE
-              interstitial: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx'	//PUT ADMOB ADCODE HERE
-            },
-            android : {
-              banner: 'ca-app-pub-4026445486483757/6109523724',		//PUT ADMOB ADCODE HERE
-              interstitial: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx'	//PUT ADMOB ADCODE HERE
-            }
-          };
-          var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
-
-          window.plugins.AdMob.setOptions( {
-            publisherId: admobid.banner,
-            interstitialAdId: admobid.interstitial,
-            adSize: window.plugins.AdMob.AD_SIZE.SMART_BANNER,	//use SMART_BANNER, BANNER, LARGE_BANNER, IAB_MRECT, IAB_BANNER, IAB_LEADERBOARD
-            bannerAtTop: false, // set to true, to put banner at top
-            overlap: true, // banner will overlap webview
-            offsetTopBar: false, // set to true to avoid ios7 status bar overlap
-            isTesting: true, // receiving test ad
-            autoShow: false // auto show interstitial ad when loaded
-          });
-
-          registerAdEvents();
-          //window.plugins.AdMob.createInterstitialView();	//get the interstitials ready to be shown
-          //window.plugins.AdMob.requestInterstitialAd();
-
-        } else {
-          alert( 'admob plugin not ready' );
-        }
-      }
-      //functions to allow you to know when ads are shown, etc.
-      function registerAdEvents() {
-        document.addEventListener('onReceiveAd', function(){});
-        document.addEventListener('onFailedToReceiveAd', function(data){});
-        document.addEventListener('onPresentAd', function(){});
-        document.addEventListener('onDismissAd', function(){ });
-        document.addEventListener('onLeaveToAd', function(){ });
-        document.addEventListener('onReceiveInterstitialAd', function(){ });
-        document.addEventListener('onPresentInterstitialAd', function(){ });
-        document.addEventListener('onDismissInterstitialAd', function(){
-          //window.plugins.AdMob.createInterstitialView();			//REMOVE THESE 2 LINES IF USING AUTOSHOW
-          //window.plugins.AdMob.requestInterstitialAd();			//get the next one ready only after the current one is closed
-        });
-      }
-
       function onDeviceReady() {
-        document.addEventListener("backbutton", handleBackButton, false);
+		cordova.plugins.backgroundMode.enable();
+        cordova.plugins.backgroundMode.overrideBackButton();
+		cordova.plugins.notification.local.setDefaults({
+			led: { color: '#FF00FF', on: 500, off: 500 },
+			vibrate: true
+		});
         //initAd();
         //window.plugins.AdMob.createBannerView();
       }

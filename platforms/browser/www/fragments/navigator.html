@@ -1,0 +1,36 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">The Professor Book</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <i class="fa fa-bars" aria-hidden="true"></i>
+
+  </button>
+
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="this.focus(); loadIndex();"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="this.focus(); loadTab('#rulesVGCTab');"><i class="fa fa-book" aria-hidden="true"></i>VGC Rules and Resources</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="this.focus(); loadTab('#rulesTCGTab');"><i class="fa fa-book" aria-hidden="true"></i>TCG Rules and Resources</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="this.focus(); loadTimer();"><i class="fa fa-clock-o" aria-hidden="true"></i> Timer</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="this.focus(); loadHPCalc();"><i class="fa fa-calculator" aria-hidden="true"></i> HP Calculator</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="this.focus(); loadPenalties();"><i class="fa fa-gavel" aria-hidden="true"></i> Penalties</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="this.focus(); loadSettings();"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="navigator.app.exitApp();"><i class="fa fa-power-off" aria-hidden="true"></i> Exit</a>
+      </li>
+    </ul>
+  </div>
+</nav>

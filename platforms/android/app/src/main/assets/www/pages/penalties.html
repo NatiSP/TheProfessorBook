@@ -1,0 +1,202 @@
+  <!-- START PENALTIES -->
+  <div ng-controller="penaltyCtrl">
+  <!-- START LIST PENALTIES -->
+    <div id="penaltyTab" class="app tab container d-none">
+      <div class="row " style="margin:1%">
+        <table class="table table-striped" id="penaltiesTable">
+          <thead>
+            <tr>
+              <th>R.</th>
+    <th style="display: none">Player Name</th>
+              <th>Player ID</th>
+              <th>Infraction Type</th>
+    <th style="display: none">Penalty Level</th>
+    <th style="display: none">Infraction Severity</th>
+    <th style="display: none">Comments</th>
+    <th colspan="2" ng-if="listPenalties.length != 0" style="text-align: right;">
+      <button class="btn btn-warning" ng-click="goToExport()">
+        <i class="fa fa-file-excel-o" aria-hidden="true"></i> Export
+      </button>
+    </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="penalty in listPenalties" >
+              <td> {{penalty.round}}</td>
+    <td style="display: none"> {{penalty.playerName}}</td>
+              <td> {{penalty.playerId}}</td>
+              <td>{{penalty.type}}</td>
+    <td style="display: none"> {{penalty.level}}</td>
+    <td style="display: none"> {{penalty.severity}}</td>
+              <td style="display: none">{{penalty.comments}}</td>
+              <td>
+                <button ng-click="modifyPenalty(penalty.id);" class="btn btn-success btn-block" >
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                </td>
+                <td>
+                  <button class="btn btn-danger btn-block" ng-click="deletePenalty(penalty.id);">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+                  </td>
+                </tr>
+                <tr ng-if="listPenalties.length == 0">
+                  <td colspan="7">The List is empty</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row justify-content-center" style="padding:1%">
+            <div class="col text-center">
+              <button type="button" class="btn btn-success btn-block" ng-click="addPenalty()">Add Penalty</button>
+            </div>
+            <div class="col text-center">
+              <button type="button" class="btn btn-info btn-block" ng-click="reset()">Reset</button>
+            </div>
+
+            <br/>
+            <div class="col text-center">
+              <button class="btn btn-warning btn-block" ng-click="scanQR();"><i class="fa fa-qrcode"></i> Scan QR</button>
+            </div>
+          </div>
+		  <div class="row justify-content-center" style="padding:1%">
+			<button type="button" class="btn btn-info btn-block" onclick="loadIndex();"><span>Back</span></button>
+		  </div>
+  </div>
+      <!-- END LIST PENALTIES -->
+
+      <!-- START PENALTY FORM -->
+      <!-- Form to Add/Modify a Penalty -->
+      <div id="penaltyForm" class="app tab container d-none">
+      <form id="penalty">
+      <div class="row justify-content-center" style="margin:1%">
+            <div class="input-group">
+              <label for="judgeName"  class="input-group-addon" style="width:50%">Judge's Name*</label>
+              <input type="text" id="judgeName" class="form-control" ng-model="penalty.judgeName" />
+            </div>
+          </div>
+          <div class="row justify-content-center" style="margin:1%">
+            <div class="input-group">
+              <label for="judgeId"  class="input-group-addon" style="width:50%">Judge's Player Id*</label>
+              <input type="text" class="form-control" id="judgeId" ng-model="penalty.judgeId" />
+            </div>
+          </div>
+          <div class="row justify-content-center" style="margin:1%">
+            <div class="input-group">
+              <label for="playerName"  class="input-group-addon" style="width:50%">Player's Name*</label>
+              <input type="text" id="playerName" class="form-control" ng-model="penalty.playerName" />
+            </div>
+          </div>
+          <div class="row justify-content-center" style="margin:1%">
+            <div class="input-group">
+              <label for="playerId"  class="input-group-addon" style="width:50%">Player's Id*</label>
+              <input type="text" class="form-control" id="playerId" ng-model="penalty.playerId" />
+            </div>
+          </div>
+          <div class="row justify-content-center" style="margin:1%">
+            <div class="input-group">
+              <label for="penaltyLevel" class="input-group-addon" style="width:50%">Penalty Level*</label>
+              <select class="form-control" id="penaltyLevel" ng-model="penalty.level" >
+                <option>Caution</option>
+                <option>Warning</option>
+                <option>Game Loss</option>
+                <option>Disqualification</option>
+              </select>
+            </div>
+          </div>
+          <div class="row justify-content-center" style="margin:1%">
+            <div class="input-group">
+              <label for="infractionType" class="input-group-addon" style="width:50%">Infraction Type*</label>
+              <select class="form-control" id="infractionType" ng-model="penalty.type" >
+                <option>Game Play</option>
+                <option>Team Error</option>
+                <option>Procedural</option>
+                <option>Unsporting</option>
+              </select>
+            </div>
+          </div>
+          <div class="row justify-content-center" style="margin:1%">
+            <div class="input-group">
+              <label for="infractionSeverity" class="input-group-addon" style="width:50%">Infraction Severity*</label>
+              <select class="form-control" id="infractionSeverity" ng-model="penalty.severity" >
+                <option>Minor</option>
+                <option>Major</option>
+                <option>Severe</option>
+              </select>
+            </div>
+          </div>
+      <div class="row justify-content-center" style="margin:1%">
+            <div class="input-group">
+              <label for="round"  class="input-group-addon" style="width:50%">Infraction Round</label>
+              <input type="number" min="1" id="round" class="form-control" ng-model="penalty.round" />
+            </div>
+          </div>
+          <div class="row justify-content-center" style="margin:1%">
+            <div class="input-group">
+              <label for="additional"  class="input-group-addon" style="width:50%">Additional Penalties</label>
+              <input type="text" class="form-control" id="additional" ng-model="penalty.additional" />
+            </div>
+          </div>
+          <div class="row justify-content-center" style="margin:1%">
+            <div class="input-group">
+              <label for="comments" class="input-group-addon" style="width:50%">Detailed Information</label>
+              <textarea class="form-control" id="comments" rows="3" ng-model="penalty.comments"></textarea>
+            </div>
+          </div>
+
+          <div class="row justify-content-center" style="padding:1%">
+            <div class="col text-center">
+              <button type="button" class="btn btn-success btn-block" ng-click="savePenalty()">Save changes</button>
+            </div>
+            <div class="col text-center">
+              <a  href="#" class="btn btn-info btn-block" onclick="loadPenalties();">Back</a>
+            </div>
+          </div>
+
+      <div class="row justify-content-center" style="padding:1%" id="msPenaltyInfo"></div>
+      </form>
+      </div>
+      <!-- END PENALTY FORM -->
+
+      <!-- START EXPORT EXCEL -->
+      <div id="penaltyExcel" class="app container d-none">
+      <form id="excel">
+      <div class="row justify-content-center" style="margin:1%">
+      <div class="input-group">
+        <label for="eventId"  class="input-group-addon" style="width:50%">Event ID*</label>
+        <input type="text" id="eventId" class="form-control" ng-model="eventId" />
+      </div>
+      </div>
+      <div class="row justify-content-center" style="margin:1%">
+      <div class="input-group">
+        <label for="eventDate"  class="input-group-addon" style="width:50%">Event Date*</label>
+        <input type="date" class="form-control" id="eventDate" ng-model="eventDate"  />
+      </div>
+      </div>
+      <div class="row justify-content-center" style="margin:1%">
+      <div class="input-group">
+        <label for="organizerName"  class="input-group-addon" style="width:50%">TO Name*</label>
+        <input type="text" id="organizerName" class="form-control" ng-model="organizerName" />
+      </div>
+      </div>
+      <div class="row justify-content-center" style="margin:1%">
+      <div class="input-group">
+        <label for="organizerId"  class="input-group-addon" style="width:50%">TO Player ID*</label>
+        <input type="text" class="form-control" id="organizerId" ng-model="organizerId"/>
+      </div>
+      </div>
+      <div class="row justify-content-center" style="padding:1%">
+      <div class="col text-center">
+        <button type="button" class="btn btn-success btn-block" ng-click="exportToExcel()">Create Excel</button>
+      </div>
+      <div class="col text-center">
+        <a  href="#" class="btn btn-info btn-block" onclick="loadPenalties();">Back</a>
+      </div>
+      </div>
+
+      <div class="row justify-content-center" style="padding:1%" id="msPenaltyExport"></div>
+      </form>
+      </div>
+      <!-- END EXPORT EXCEL -->
+      </div>
+      <!-- END PENALTIES -->

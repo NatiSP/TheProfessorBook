@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="10103" id="com.natisp.theprofessorbook" version="1.1.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="10300" id="com.natisp.theprofessorbook" version="1.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>The Professor Book</name>
     <description>
-        The best tools for VGC TO and Judges
+        The best tools for TO and Judges
     </description>
-    <author email="nataliagtrd@gmail.com" href="http://www.twitter.com/natisp27">
+    <author email="nataliagtrd@gmail.com" href="http://www.twitter.com/natisp_">
         Natalia Gutiérrez
     </author>
     <content src="index.html" />
-    <preference name="android-minSdkVersion" value="16" />
+    <preference name="android-minSdkVersion" value="26" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -22,12 +22,18 @@
         <icon density="mdpi" src="res/icon/android/icon-48-mdpi.png" />
         <icon density="hdpi" src="res/icon/android/icon-72-hdpi.png" />
         <icon density="xhdpi" src="res/icon/android/icon-96-xhdpi.png" />
+		<edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/uses-permission" xmlns:android="http://schemas.android.com/apk/res/android">
+			<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+		</edit-config>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
-    <plugin name="cordova-plugin-admob-simple" spec="^3.3.4" />
-    <engine name="android" spec="^7.0.0" />
+    <plugin name="cordova-plugin-app-launcher" />
+    <plugin name="phonegap-plugin-barcodescanner" />
+    <feature name="BarcodeScanner">
+        <param name="android-package" value="com.phonegap.plugins.barcodescanner.BarcodeScanner" />
+    </feature>
 </widget>

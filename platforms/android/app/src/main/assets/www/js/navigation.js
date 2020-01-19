@@ -1,6 +1,8 @@
+var timerGage;
+
 // process the confirmation dialog result
 function onConfirm(buttonIndex) {
-    if(buttonIndex == "Yes"){
+    if(buttonIndex == "Yes" || buttonIndex == 1){
       navigator.app.exitApp();
     }
 }
@@ -9,7 +11,7 @@ function onConfirm(buttonIndex) {
 //
 function askForExit() {
     navigator.notification.confirm(
-        'You want to exit?', // message
+        'Do you want to exit?', // message
          onConfirm,            // callback to invoke with index of button pressed
         'Exit',           // title
         ['Yes','No']         // buttonLabels
@@ -19,13 +21,13 @@ function askForExit() {
 function hideAll(){
   $('.menu').toggleClass('menu-active');
   $(".navbar-collapse").collapse('hide');
-  $("#indexTab").addClass("d-none");
-  $("#rulesTab").addClass("d-none");
-  $("#timerTab").addClass("d-none");
-  $("#HPCalcTab").addClass("d-none");
-  $("#penaltyTab").addClass("d-none");
-  $("#penaltyForm").addClass("d-none");
-  $("#settingsTab").addClass("d-none");
+  $(".tab").addClass("d-none");
+}
+
+function loadTab(tab){
+  hideAll();
+  $(tab).removeClass("d-none");
+  $('.menu').toggleClass('menu-active');
 }
 
 function loadIndex(){
@@ -44,6 +46,31 @@ function loadTimer(){
   hideAll();
   $("#timerTab").removeClass("d-none");
   $('.menu').toggleClass('menu-active');
+  if(timerGage == null){
+    timerGage = new JustGage({
+      id: "gg1",
+      value: 3000,
+      min: 0,
+      max: 3000,
+      hideMinMax: true,
+      donut: true,
+      pointer: true,
+      counter: true,
+      customSectors: [{
+        color : "#ff0000",
+        lo : 0,
+        hi : 300
+      },{
+        color : "#00ff00",
+        lo : 300,
+        hi : 3000
+      }],
+      textRenderer: getCurrentTime,
+      relativeGaugeSize: true
+    });
+    timerGage.refresh(3000);
+  }
+
 }
 
 function loadHPCalc(){
@@ -53,9 +80,9 @@ function loadHPCalc(){
 }
 
 function loadPenalties(){
-  hideAll();
-  $("#penaltyTab").removeClass("d-none");
-  $('.menu').toggleClass('menu-active');
+	hideAll();
+	$("#penaltyTab").trigger("loadListPenalty");
+	$('.menu').toggleClass('menu-active');
 }
 
 function loadSettings(){
@@ -72,6 +99,12 @@ if($("#indexTab").hasClass("d-none")){
   navigator.app.exitApp();
 }
 
+}
+
+var getCurrentTime = function (){
+  var minutes = Math.floor(3000 / 60);
+  var seconds = 3000 - minutes * 60;
+  return (new Array(2+1).join('0')+minutes).slice(-2) + ':' + (new Array(2+1).join('0')+seconds).slice(-2);
 }
 
 $("#button").click(function() {

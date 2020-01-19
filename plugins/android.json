@@ -7,15 +7,41 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-admob-simple": {
+    "cordova-plugin-app-launcher": {
       "PACKAGE_NAME": "com.natisp.theprofessorbook"
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.natisp.theprofessorbook"
+    },
+    "phonegap-plugin-barcodescanner": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.1.1",
+      "PACKAGE_NAME": "com.natisp.theprofessorbook"
+    },
+    "cordova-plugin-background-mode": {
+      "PACKAGE_NAME": "com.natisp.theprofessorbook"
+    },
+    "cordova-plugin-local-notification": {
+      "PACKAGE_NAME": "com.natisp.theprofessorbook"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.natisp.theprofessorbook"
+    },
+    "cordova-plugin-camera": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "com.natisp.theprofessorbook"
+    },
+    "cordova-plugin-androidx-adapter": {
+      "PACKAGE_NAME": "com.natisp.theprofessorbook"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "com.natisp.theprofessorbook"
     }
   },
   "dependent_plugins": {
-    "cordova-admob-sdklibs": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.natisp.theprofessorbook"
+    },
+    "cordova-plugin-badge": {
       "PACKAGE_NAME": "com.natisp.theprofessorbook"
     }
   }

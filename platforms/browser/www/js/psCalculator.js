@@ -1,5 +1,5 @@
-var psApp = angular.module("psApp", []);
-psApp.controller("psCtrl", ['$scope','$window',
+
+professorApp.controller("psCtrl", ['$scope','$window',
   function($scope,$window) {
       // $scope.team1 = [
       //   { currentPS: null, totalPS: null },
@@ -16,16 +16,26 @@ psApp.controller("psCtrl", ['$scope','$window',
       $scope.team1 = [];
       $scope.team2 = [];
 
-      var numPreference = parseInt(window.localStorage.getItem("pokeNumber"));
-      if(numPreference == null){
-        numPreference = 4;
+      $scope.numPreference = parseInt(window.localStorage.getItem("pokeNumber"));
+      if($scope.numPreference == null){
+        $scope.numPreference = 4;
       }
+
       $scope.init = function(){
-        for(var i=0; i<numPreference; i++){
+        $scope.team1 = [];
+        $scope.team2 = [];
+        for(var i=0; i<$scope.numPreference; i++){
           $scope.team1.push({ currentPS: null, totalPS: null });
           $scope.team2.push({ currentPS: null, totalPS: null });
           console.log($scope.team1);
         }
+      };
+      $scope.setPokeNumber = function (number){
+        var storage = window.localStorage;
+        storage.setItem("pokeNumber", number);
+        console.log(storage.getItem("pokeNumber"));
+        $scope.numPreference = number;
+        $scope.init();
       };
       $window.onload = $scope.init();
       $scope.currentPSTeam1 = 0;
